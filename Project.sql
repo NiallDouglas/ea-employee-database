@@ -8,7 +8,7 @@ CREATE TABLE `Employees` (
 	`Address` varchar(50),
 	`NIN` char(9) UNIQUE,
 	`BankNum` char(17) UNIQUE,
-	`Salary decimal`(10,2),
+	`Salary` decimal(10,2),
 	`Department` varchar(20),
 	`GrossPay` decimal(11,2),
     PRIMARY KEY (`EmployeeID`)
