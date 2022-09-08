@@ -8,17 +8,94 @@ import java.util.Objects;
 
 public class Employee implements Comparable<Employee>, Payable {
 
-    public static final int MIN_SALARY = 7_000_00;
+    public static final float MIN_SALARY = 7_000_00.00f;
 
     private short number; // employee number
+
+    private String name;  // employee name
+
+    private String address;
+
+    private String NIN;
+
+    private String bankAccountNo;
+
+    private float salary;
+
+    private String department;
+
+    private float grossPay;
+
+    public Employee() {
+        number = -1;
+    }
+
+    public Employee(short newNumber) {
+        this();
+        setNumber(newNumber);
+    }
+
+    public Employee(float newSalary) {
+        this();
+        setSalary(newSalary);
+    }
+
+    public Employee(short newNumber, float newSalary, String newName) {
+        this(newNumber); // good
+        setSalary(newSalary);
+        setName(newName);
+    }
+
+    public Employee(short newNumber, String newName, String newAddress, String newNIN, String newBankAcctNo,
+                    float newSalary, String newDepartment, float newGrossPay) {
+        this(newNumber); // good
+        setName(newName);
+        setAddress(newAddress);
+        setNIN(newNIN);
+        setBankAccountNo(newBankAcctNo);
+        setSalary(newSalary);
+        setDepartment(newDepartment);
+        setGrossPay(newGrossPay);
+    }
 
     public short getNumber() {
         return number;
     }
 
-    private String address;
+    public boolean setNumber(short thisNumber) {
+        if (thisNumber > 0) {
+            number = thisNumber;
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    private String NIN;
+    public boolean setNumber(String thisNumber) {
+        try {
+            short s = Short.parseShort(thisNumber);
+            return setNumber(s);
+        } catch (NumberFormatException e) {
+            throw new BadNumber(e.getMessage());
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String setName() {
+        return null;
+    }
+
+    public void setName(String name) {
+        if (name.length() > 0) {
+            this.name = name;
+        } else {
+            throw new RuntimeException("Name cannot be empty when adding a new employee");
+        }
+    }
 
     public String getAddress() {
         return address;
@@ -44,43 +121,11 @@ public class Employee implements Comparable<Employee>, Payable {
         this.bankAccountNo = bankAccountNo;
     }
 
-    private String bankAccountNo;
-
-
-    public boolean setNumber(short thisNumber) {
-        if (thisNumber > 0) {
-            number = thisNumber;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean setNumber(String thisNumber) {
-        try {
-            short s = Short.parseShort(thisNumber);
-            return setNumber(s);
-        } catch (NumberFormatException e) {
-            throw new BadNumber(e.getMessage());
-        }
-    }
-
-    protected int salary;   // employee salary in pence
-    private String name;  // employee name
-
-    public int calcPay() { // return the monthly pay
-        return getSalary() / 12;
-    }
-
-    public Employee() {
-        number = -1;
-    }
-
-    public int getSalary() {
+    public float getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(float salary) {
         if (salary >= MIN_SALARY) {
             this.salary = salary;
         } else {
@@ -91,39 +136,25 @@ public class Employee implements Comparable<Employee>, Payable {
         }
     }
 
-    public String getName() {
-        return name;
+    public String getDepartment() {
+        return department;
     }
 
-    @Override
-    public String setName() {
-        return null;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
-    public void setName(String name) {
-        if (name.length() > 0) {
-            this.name = name;
-        } else {
-            throw new RuntimeException("Name cannot be empty when adding a new employee");
-        }
+    public float getGrossPay() {
+        return grossPay;
     }
 
-    public Employee(short newNumber) {
-        this();
-        setNumber(newNumber);
+    public void setGrossPay(float grossPay) {
+        this.grossPay = grossPay;
     }
 
-    public Employee(int newSalary) {
-        this();
-        setSalary(newSalary);
+    public float calcPay() { // return the monthly pay
+        return getSalary() / 12;
     }
-
-    public Employee(short newNumber, int newSalary, String newName) {
-        this(newNumber); // good
-        setSalary(newSalary);
-        setName(newName);
-    }
-
 
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -138,9 +169,12 @@ public class Employee implements Comparable<Employee>, Payable {
     @Override
     public String toString() {
         return "Employee{" +
-                "Employee Number:" + number +
-                ", Salary: £" + salary +
-                ", Name: " + name +
+                "Employee Number: " + number +
+                "Employee Name: " + name +
+                "Employee Address: " + address +
+                "Employee National Insurance Number: " + NIN +
+                "Employee Bank Account Number: " + bankAccountNo +
+                "Employee Salary: £" + salary +
                 +'}';
     }
 
