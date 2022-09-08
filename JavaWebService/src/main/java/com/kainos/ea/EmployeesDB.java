@@ -12,14 +12,16 @@ public class EmployeesDB {
     public static List<Employee> getEmployees() {
         List<Employee> readEmp = new ArrayList<>();
         try {
-            Connection c = getConnection();// Bad practices alert!
+            Connection c = getConnection();
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(
                     "SELECT * FROM Employees");
 
             while (rs.next()) {
-                Employee dbEmp = new Employee(rs.getShort("EmployeeID"),
-                        rs.getInt("Salary"), rs.getString("Name"));
+                Employee dbEmp = new Employee(rs.getShort("number"),
+                        //Changed getInt for salary to getFloat to match the changes in the Employee class
+                        rs.getFloat("salary"), rs.getString("name"));
+
                 System.out.println(dbEmp);
                 readEmp.add(dbEmp);
             }

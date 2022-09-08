@@ -43,7 +43,7 @@ public class SalesEmployee extends Employee {
     }
 
     @Override
-    public int calcPay() {
+    public float calcPay() {
 
         return super.calcPay() + Math.round(commissionRate * salesTotal);
     }
