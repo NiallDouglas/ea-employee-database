@@ -21,28 +21,10 @@ public class Employee implements Comparable<Employee>, Payable {
     private String NIN;
 
     private String bankAccountNo;
-    
-    public String getDepartment() {
-        return Department;
-    }
-
-    public void setDepartment(String department) {
-        Department = department;
-    }
 
     private String Department;
 
-    public double getGrossPay() {
-        return grossPay;
-    }
-
-    public void setGrossPay(double grossPay) {
-        this.grossPay = grossPay;
-    }
-
-    private double grossPay;
-
-    public String getAddress() {
+    public String getaddress() {
         return address;
     }
 
@@ -80,7 +62,7 @@ public class Employee implements Comparable<Employee>, Payable {
         setNIN(newNIN);
         setBankAccountNo(newBankAcctNo);
         setSalary(newSalary);
-        setDepartment(newDepartment);
+        setDepartment(Department);
         setGrossPay(newGrossPay);
     }
 
