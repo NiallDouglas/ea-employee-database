@@ -1,5 +1,7 @@
 package com.kainos.ea;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kainos.ea.resources.BadNumber;
 
 import java.util.Objects;
@@ -19,6 +21,26 @@ public class Employee implements Comparable<Employee>, Payable {
     private String address;
 
     private String NIN;
+
+    public String getDepartment() {
+        return Department;
+    }
+
+    public void setDepartment(String department) {
+        Department = department;
+    }
+
+    private String Department;
+
+    public double getGrossPay() {
+        return grossPay;
+    }
+
+    public void setGrossPay(double grossPay) {
+        this.grossPay = grossPay;
+    }
+
+    private double grossPay;
 
     public String getAddress() {
         return address;
@@ -81,14 +103,7 @@ public class Employee implements Comparable<Employee>, Payable {
     }
 
     public void setSalary(int salary) {
-        if (salary >= MIN_SALARY) {
-            this.salary = salary;
-        } else {
-            throw new SalaryTooLowExpection(
-                    String.format("Salary £%,.2f is below the minimum salary £%,.2f.",
-                            salary / 100.0, MIN_SALARY / 100.0));
-
-        }
+        this.salary = salary;
     }
 
     public String getName() {
@@ -147,6 +162,11 @@ public class Employee implements Comparable<Employee>, Payable {
     @Override
     public int compareTo(Employee o) {
         return Float.compare(this.getSalary(), o.getSalary());
+    }
+
+    @JsonCreator
+    public Employee(@JsonProperty("name") String name) {
+        this.setName(name);
     }
 }
 
