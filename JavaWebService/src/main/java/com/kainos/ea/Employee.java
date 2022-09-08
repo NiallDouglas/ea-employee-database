@@ -1,5 +1,7 @@
 package com.kainos.ea;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kainos.ea.resources.BadNumber;
 
 import java.util.Objects;
@@ -19,6 +21,30 @@ public class Employee implements Comparable<Employee>, Payable {
     private String NIN;
 
     private String bankAccountNo;
+    
+    public String getDepartment() {
+        return Department;
+    }
+
+    public void setDepartment(String department) {
+        Department = department;
+    }
+
+    private String Department;
+
+    public double getGrossPay() {
+        return grossPay;
+    }
+
+    public void setGrossPay(double grossPay) {
+        this.grossPay = grossPay;
+    }
+
+    private double grossPay;
+
+    public String getAddress() {
+        return address;
+    }
 
     private float salary;
 
@@ -125,15 +151,9 @@ public class Employee implements Comparable<Employee>, Payable {
         return salary;
     }
 
-    public void setSalary(float salary) {
-        if (salary >= MIN_SALARY) {
-            this.salary = salary;
-        } else {
-            throw new SalaryTooLowExpection(
-                    String.format("Salary £%,.2f is below the minimum salary £%,.2f.",
-                            salary / 100.0, MIN_SALARY / 100.0));
 
-        }
+    public void setSalary(float salary) {
+        this.salary = salary;
     }
 
     public String getDepartment() {
@@ -181,6 +201,11 @@ public class Employee implements Comparable<Employee>, Payable {
     @Override
     public int compareTo(Employee o) {
         return Float.compare(this.getSalary(), o.getSalary());
+    }
+
+    @JsonCreator
+    public Employee(@JsonProperty("name") String name) {
+        this.setName(name);
     }
 }
 

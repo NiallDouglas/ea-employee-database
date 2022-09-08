@@ -15,16 +15,13 @@ public class EmployeesDB {
             Connection c = getConnection();
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(
-                    "SELECT emp_no AS `number`, "
-                            + "CONCAT_WS (' ', first_name, last_name) AS `name`, "
-                            + "salary * 100 AS `salary` "
-                            + "FROM employees JOIN salaries USING(emp_no) "
-                            + "WHERE to_date > NOW() AND salary = 100000");
+                    "SELECT * FROM Employees");
 
             while (rs.next()) {
                 Employee dbEmp = new Employee(rs.getShort("number"),
                         //Changed getInt for salary to getFloat to match the changes in the Employee class
                         rs.getFloat("salary"), rs.getString("name"));
+
                 System.out.println(dbEmp);
                 readEmp.add(dbEmp);
             }
@@ -32,6 +29,19 @@ public class EmployeesDB {
             e.printStackTrace();
         }
         return readEmp;
+    }
+
+    public static void insertEmployee(Employee employee) {
+        try {
+            Connection c = getConnection();// Bad practices alert!
+            Statement st = c.createStatement();
+            st.executeUpdate(
+                    "INSERT INTO Employees (`Name`, Address, NIN, BankNum, Salary, Department, GrossPay) " +
+                            "VALUES " +
+                            "('" + employee.getName() + "', '" + employee.getAddress() + "', '" + employee.getNIN() + "', '" + employee.getBankAccountNo() + "', '" + employee.getSalary() + "', '" + employee.getDepartment() + "', '" + employee.getGrossPay() + "')");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     private static Connection getConnection() {
         String user;
@@ -60,7 +70,7 @@ public class EmployeesDB {
                                 + "user, password, and host properties.");
 
             conn = DriverManager.getConnection("jdbc:mysql://"
-                    + host + "/employees?useSSL=false", user, password);
+                    + host + "/projectEA_MatthewK?useSSL=false", user, password);
             return conn;
 
         } catch (Exception e) {
