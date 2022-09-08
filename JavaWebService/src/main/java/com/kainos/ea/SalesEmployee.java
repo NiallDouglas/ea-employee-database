@@ -7,12 +7,14 @@ public class SalesEmployee extends Employee {
     private float commissionRate;
     private int salesTotal;
 
-    public SalesEmployee(short newNumber, int newSalary, String newName) {
+    public SalesEmployee(short newNumber, float newSalary, String newName) {
         super(newNumber, newSalary, newName);
     }
 
-    public SalesEmployee(short newNumber, int newSalary, String newName, float newCommissionRate, int newSalesTotal) {
-        super(newNumber, newSalary, newName);
+    public SalesEmployee(short newNumber, String newName, String newAddress, String newNIN, String newBankAcctNo,
+                         float newSalary, String newDepartment, float newGrossPay, float newCommissionRate,
+                         int newSalesTotal) {
+        super(newNumber, newName, newAddress, newNIN, newBankAcctNo, newSalary, newDepartment, newGrossPay);
         setCommissionRate(newCommissionRate);
         setSalesTotal(newSalesTotal);
     }
@@ -59,7 +61,8 @@ public class SalesEmployee extends Employee {
 
     @Override
     public String toString() {
-        return super.toString() + " Commission Rate: " + getCommissionRate() + "% Total Sales: £" + getSalesTotal();
+        return super.toString() + " Employee Commission Rate: " + getCommissionRate() + " Employee Total Sales: £"
+                + getSalesTotal();
     }
 
     /*
