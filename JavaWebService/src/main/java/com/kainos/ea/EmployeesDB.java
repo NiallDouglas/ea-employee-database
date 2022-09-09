@@ -30,7 +30,27 @@ public class EmployeesDB {
         }
         return readEmp;
     }
+    public static List<Employee> getEmployeesByDep() {
+        List<Employee> readEmp = new ArrayList<>();
+        try {
+            Connection c = getConnection();
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery(
+                    "SELECT `Name` FROM Employees ORDER BY Department");
 
+            while (rs.next()) {
+                Employee dbEmp = new Employee(rs.getShort("Number"),rs.getString("Name"), rs.getString("Address"), rs.getString("NIN"),rs.getString("BankAccNo"),
+                        //Changed getInt for salary to getFloat to match the changes in the Employee class
+                        rs.getFloat("salary"), rs.getString("Department"),rs.getFloat("NewGrossPay"));
+
+                System.out.println(dbEmp);
+                readEmp.add(dbEmp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return readEmp;
+    }
     public static void insertEmployee(Employee employee) {
         try {
             Connection c = getConnection();// Bad practices alert!
