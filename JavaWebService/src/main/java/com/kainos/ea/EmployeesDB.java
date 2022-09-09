@@ -36,7 +36,7 @@ public class EmployeesDB {
             Connection c = getConnection();
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(
-                    "SELECT `Name`, Department FROM Employees ORDER BY Department");
+                    "SELECT * FROM Employees ORDER BY Department");
 
             while (rs.next()) {
                 Employee dbEmp = new Employee(rs.getShort("EmployeeID"),rs.getString("Name"), rs.getString("Address"), rs.getString("NIN"),rs.getString("BankNum"),

@@ -41,4 +41,11 @@ public class WebService {
         EmployeesDB.insertEmployee(employee);
     }
 
+    @GET
+    @Path("/employees/department")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Employee> getEmployeesByDepartment() {
+        return EmployeesDB.getEmployeesByDep();
+    }
+
 }
