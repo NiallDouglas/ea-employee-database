@@ -51,8 +51,6 @@ public class EmployeesDB {
         }
         return readEmp;
     }
-
-
     public static void insertEmployee(Employee employee) {
         try {
             Connection c = getConnection();// Bad practices alert!
