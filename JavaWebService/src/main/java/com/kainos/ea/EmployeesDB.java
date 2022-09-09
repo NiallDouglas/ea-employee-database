@@ -18,9 +18,9 @@ public class EmployeesDB {
                     "SELECT * FROM Employees");
 
             while (rs.next()) {
-                Employee dbEmp = new Employee(rs.getShort("number"),
+                Employee dbEmp = new Employee(rs.getShort("Number"),rs.getString("Name"), rs.getString("Address"), rs.getString("NIN"),rs.getString("BankAccNo"),
                         //Changed getInt for salary to getFloat to match the changes in the Employee class
-                        rs.getFloat("salary"), rs.getString("name"));
+                        rs.getFloat("salary"), rs.getString("Department"),rs.getFloat("NewGrossPay"));
 
                 System.out.println(dbEmp);
                 readEmp.add(dbEmp);
