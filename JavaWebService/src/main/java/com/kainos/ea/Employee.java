@@ -22,11 +22,6 @@ public class Employee implements Comparable<Employee>, Payable {
 
     private String bankAccountNo;
 
-    private String Department;
-
-    public String getaddress() {
-        return address;
-    }
 
     private float salary;
 
@@ -57,13 +52,13 @@ public class Employee implements Comparable<Employee>, Payable {
     public Employee(short newNumber, String newName, String newAddress, String newNIN, String newBankAcctNo,
                     float newSalary, String newDepartment, float newGrossPay) {
         this(newNumber); // good
-        setName(newName);
-        setAddress(newAddress);
-        setNIN(newNIN);
-        setBankAccountNo(newBankAcctNo);
-        setSalary(newSalary);
-        setDepartment(Department);
-        setGrossPay(newGrossPay);
+        this.setName(newName);
+        this.setAddress(newAddress);
+        this.setNIN(newNIN);
+        this.setBankAccountNo(newBankAcctNo);
+        this.setSalary(newSalary);
+        this.setDepartment(newDepartment);
+        this.setGrossPay(newGrossPay);
     }
 
     public short getNumber() {

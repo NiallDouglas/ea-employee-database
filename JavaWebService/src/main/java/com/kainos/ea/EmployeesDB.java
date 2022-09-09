@@ -18,9 +18,9 @@ public class EmployeesDB {
                     "SELECT * FROM Employees");
 
             while (rs.next()) {
-                Employee dbEmp = new Employee(rs.getShort("Number"),rs.getString("Name"), rs.getString("Address"), rs.getString("NIN"),rs.getString("BankAccNo"),
+                Employee dbEmp = new Employee(rs.getShort("EmployeeID"),rs.getString("Name"), rs.getString("Address"), rs.getString("NIN"),rs.getString("BankNum"),
                         //Changed getInt for salary to getFloat to match the changes in the Employee class
-                        rs.getFloat("salary"), rs.getString("Department"),rs.getFloat("NewGrossPay"));
+                        rs.getFloat("salary"), rs.getString("Department"),rs.getFloat("GrossPay"));
 
                 System.out.println(dbEmp);
                 readEmp.add(dbEmp);
@@ -39,9 +39,9 @@ public class EmployeesDB {
                     "SELECT `Name`, Department FROM Employees ORDER BY Department");
 
             while (rs.next()) {
-                Employee dbEmp = new Employee(rs.getShort("Number"),rs.getString("Name"), rs.getString("Address"), rs.getString("NIN"),rs.getString("BankAccNo"),
+                Employee dbEmp = new Employee(rs.getShort("EmployeeID"),rs.getString("Name"), rs.getString("Address"), rs.getString("NIN"),rs.getString("BankNum"),
                         //Changed getInt for salary to getFloat to match the changes in the Employee class
-                        rs.getFloat("salary"), rs.getString("Department"),rs.getFloat("NewGrossPay"));
+                        rs.getFloat("salary"), rs.getString("Department"),rs.getFloat("GrossPay"));
 
                 System.out.println(dbEmp);
                 readEmp.add(dbEmp);
